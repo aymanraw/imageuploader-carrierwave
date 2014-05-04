@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: gosoog
+  api_key: '729821799134147'
+  api_secret: s16-Jm1grqyDoI-YW_oWDxDg0fQ
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: gosoog
+  api_key: '729821799134147'
+  api_secret: s16-Jm1grqyDoI-YW_oWDxDg0fQ
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: gosoog
+  api_key: '729821799134147'
+  api_secret: s16-Jm1grqyDoI-YW_oWDxDg0fQ
+  enhance_image_tag: true
+  static_image_support: false

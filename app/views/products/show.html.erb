@@ -1,0 +1,11 @@
+<h1>All Products</h1>
+<% @products.each do |product|%>
+	<div>
+		<h1>Image</h1>
+		<% product.pictures.each do |p| %>
+			<div><%= p.img.full_public_id %></div>
+			<div><%= cl_image_tag p.img.full_public_id, width: 60, height: 50, crop: "fit" %></div>
+		<%end%>
+	</div>
+
+<%end%>

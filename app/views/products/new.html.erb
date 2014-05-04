@@ -1,0 +1,12 @@
+<div>
+	<%= form_for @product, url: {action: "create"}, :html=>{:multipart => true } do |f| %>
+		<div class='pool'>
+			<%= render 'nested_pictures', :f => f, :child_index => Time.now.to_i %>
+		</div>
+		<%= link_to "Add More", "#", :class => 'add_more_ajax', remote: true %>
+		<%= f.submit 'Save', data: { disable_with: 'Saving...' }  %>
+	<%end%>
+</div>
+
+<!-- Configure Cloudinary jQuery plugin -->
+<%= cloudinary_js_config %>
