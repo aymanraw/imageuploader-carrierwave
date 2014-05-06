@@ -1,0 +1,3 @@
+var img = $.cloudinary.image("<%= @temp_pic.public_id %>", {width: 50, height: 50, crop: "fit"});
+var container = $("<div data-public= <%= @temp_pic.public_id %>></div>").append(img)
+$(".pool").append(container);

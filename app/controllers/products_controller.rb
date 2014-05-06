@@ -23,17 +23,16 @@ class ProductsController < ApplicationController
   end
 
   def picture_in
-    puts "ayman ---------"
     render :picture_in, layout: false
   end
 
   def save_temp_pic
-
-    temp_pic = PictureTemp.new()
-    temp_pic.public_id = params[:pic]
-    temp_pic.save!
+    @temp_pic = PictureTemp.new()
+    @temp_pic.public_id = params[:pic]
   	respond_to do |format|
-      format.js {}
+      if @temp_pic.save!
+        format.js
+      end
     end
   end
 

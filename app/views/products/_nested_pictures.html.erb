@@ -1,6 +1,7 @@
 <%= f.fields_for :pictures, Picture.new, :child_index => child_index do |builder| %>
 	<div class="picture-uploader">
 		<div>
+			
 			<div class="upload_button_holder">
 				<%= link_to("Upload", "#", :class => "upload_button") %>
 				<%= builder.cl_image_upload(:img) %>
