@@ -17,17 +17,30 @@ cloudinary_upload = (obj)->
 		    ).off("cloudinarydone").on("cloudinarydone", (e, data) ->
 		         $("#photo_bytes").val(data.result.bytes)
 		         $("#imageStatus").text("")
-		         $(this).parent().append($.cloudinary.image(data.result.public_id, {format: data.result.format, width: 50, height: 50, crop: "fit"}))
-		         $(this).prev().remove()
-		         $(this).css("display", "none")
+		         input_name = $(this).data("cloudinary-field")
+		         input_field = $(this).parent().parent()
 		         $.ajax 
 		            url: "/products/save_temp_pic",
 		            type: "post",
-		            data: {"pic": data.result.public_id}              
+		            data: {"pic": data.result.public_id, "name": input_name}
+		            ,beforeSend: ->
+		            	console.log "before send"
+		            ,success: (data, textStatus, jqXHR) -> 
+		            	console.log "Successed"
+		            	input_field.remove()
+		            	console.log "text status is: #{textStatus}"
+		            	console.log "Data is: #{data}"
+		            ,error: (data, textStatus, jqXHR) ->
+		            	console.log "error"
+		            	console.log data
+		            ,complete: ->
+		            	console.log "Completed" 
 			)
 
 $(document).on 'ready page:load', ->
 	cloudinary_upload $(".cloudinary-fileupload")
+	obj = $(".cloudinary-fileupload[data-url='https://api.cloudinary.com/v1_1/gosoog/auto/upload']")
+	console.log obj.attr('name')
 	template_h = $('#template').html()
 	pool_of_items = $('.pool')
 	$(document).on 'click', '.delete',(event) ->

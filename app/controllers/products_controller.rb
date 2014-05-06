@@ -38,6 +38,8 @@ class ProductsController < ApplicationController
 
   def destroy_pic
     @temp_pic = PictureTemp.find(params[:id])
+    puts params
+    Cloudinary::Uploader.destroy(@temp_pic.public_id)
     respond_to do |format|
       if @temp_pic.destroy
         format.js {  }

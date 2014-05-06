@@ -1,0 +1,4 @@
+var obj = $("div[data-public=<%= escape_javascript @temp_pic.public_id%>]");
+var hidden_val = "input[name='" + obj.attr("name") +"']";
+$(hidden_val).remove();
+obj.remove();
