@@ -1,11 +1,13 @@
-<div id="imageStatus">status text</div>
+
+<div id="imageStatus"></div>
 <div>
+
 	<%= form_for @product, url: {action: "create"}, :html=>{:multipart => true } do |f| %>
 		<div class='pool'>
 			<%= render 'nested_pictures', :f => f, :child_index => Time.now.to_i %>
 		</div>
-		<%= link_to "Add More", "#", :class => 'add_more_ajax', remote: true %>
-		<%= f.submit 'Save', data: { disable_with: 'Saving...' }  %>
+		<%= link_to "Add More", "#", :class => 'add_more_ajax btn btn-default', remote: true %>
+		<%= f.submit 'Save',class: "btn btn-primary", data: { disable_with: 'Saving...' }  %>
 	<%end%>
 </div>
 

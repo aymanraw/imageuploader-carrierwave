@@ -3,32 +3,32 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 //-------------------
-.upload_button_holder {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
+
+.delete{
+  float: right;
+}
+.picture-uploader{
+   padding: 10px;
 }
 
 .upload_button_holder .upload_button {
   display: block;
   position: relative;
-  font-weight: bold;
   font-size: 14px;
-  background-color: rgb(15, 97, 172);
-  color: #fff;
+  background-color: white;
+  color: #ccc;
   padding: 5px 0;
-  border: 1px solid #000;
+  border: 2px solid #ddd;
   border-radius: 4px;
-  width: 100px;
-  height: 30px;
+  width: 100%;
+  height: 50px;
+  line-height: 35px;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
-.upload_button_holder:hover .upload_button {
-  background-color: rgb(17, 133, 240);
-}
 
 .upload_button_holder .cloudinary-fileupload {
   opacity: 0;
@@ -44,21 +44,18 @@
   border: none;
 }
 
-.thumb-preview{
-  & .image-delete-button{
-    position: relative;
-    top: -10px;
-    width: 20px;
-    height: 20px;
-    background-color: yellow;
-    border-radius: 10px;
-    text-align: center;
-    border: 1px solid black;
-    cursor: pointer;
+.image-preview{
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #eee;
+  & img{
+    display: inline;
+    margin: 0;
   }
-  & .prev-img{
-    position: relative;
-    left: 10px;
-    
+  & .btn{
+    float: right;
+    margin-left: 30px;
   }
 }

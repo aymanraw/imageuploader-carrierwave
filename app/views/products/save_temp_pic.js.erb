@@ -1,3 +1,3 @@
 var img = $.cloudinary.image("<%= @temp_pic.public_id %>", {width: 50, height: 50, crop: "fit"});
-var container = $("<div data-public= <%= @temp_pic.public_id%> name=<%= params[:name]%>></div>").append(img, "<%= escape_javascript link_to('delete', destroy_pic_products_path(@temp_pic.id),method: :delete, :remote => true, data: {confirm: 'are you sure?'})%>");
-$(".pool").append(container);
+var container = $("<div class='image-preview' data-public= <%= @temp_pic.public_id%> name=<%= params[:name]%>></div>").append(img, "<%= escape_javascript link_to('delete', destroy_pic_products_path(@temp_pic.id),method: :delete,class: 'btn btn-danger', :remote => true, data: {confirm: 'are you sure?'})%>");
+$(".pool").prepend(container);
