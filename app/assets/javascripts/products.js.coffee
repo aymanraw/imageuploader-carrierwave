@@ -50,13 +50,9 @@ $(document).on 'ready page:load', ->
 
 	$('form').on 'click', '.add-fields', (event) ->
 	    time = new Date().getTime()
-	    fields = $(this).data('fields')
-	    console.log fields
-		regexp = RegExp($(this).data('id'), 'g')
-		dataf = fields.replace(regexp, time)
-		$(this).before(dataf)
-		event.preventDefault()
-
+	    regexp = RegExp($(this).data('id'), 'g')
+	    $(this).before($(this).data('fields').replace(regexp, time))
+	    event.preventDefault()
 	
    
 		
