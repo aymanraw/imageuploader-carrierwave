@@ -43,35 +43,19 @@ cloudinary_upload = (obj)->
 
 $(document).on 'ready page:load', ->
 	cloudinary_upload $(".cloudinary-fileupload")
-	template_h = $('#template').html()
-	pool_of_items = $('.pool')
-	$(document).on 'click', '.delete',(event) ->
-		if confirm('Are you sure you want to delete ?')
-			console.log "delete"
-			$(this).parent().parent().remove()
-		else
-			console.log "dont delete"
+	$('form').on 'click', '.delete', (event) ->
+		$(this).prev('input[type=hidden]').val(1)
+		$(this).closest('fieldset').hide()
 		event.preventDefault()
-	$('.add_more_ajax').on 'click', (event) ->
-		clicked = $(this)
-		if clicked.hasClass('disabled') then return false
-		$.ajax 
-		   url: '/products/picture_in'
-		   ,data:{}
-		   ,method: 'get'
-		   ,beforeSend: ->
-		        clicked.addClass('disabled')
-		        $("#loader").css("display", "normal")
-		   ,success: (data, textStatus, jqXHR) -> 
-		        form_data = $(data).children('.picture-uploader')
-		        console.log "in success"
-		        pool_of_items.append(form_data)
-		        cloudinary_upload form_data.find('.cloudinary-fileupload')
-		    ,error: (jqXHR, textStatus, error_thrown) ->
-		        alert('Error')
-		     ,complete: ->
-		       $("#loader").css("display", "none") 
-		       clicked.removeClass('disabled')
+
+	$('form').on 'click', '.add-fields', (event) ->
+	    time = new Date().getTime()
+	    fields = $(this).data('fields')
+	    console.log fields
+		regexp = RegExp($(this).data('id'), 'g')
+		dataf = fields.replace(regexp, time)
+		$(this).before(dataf)
+		event.preventDefault()
 
 	
    

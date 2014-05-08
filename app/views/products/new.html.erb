@@ -4,9 +4,12 @@
 
 	<%= form_for @product, url: {action: "create"}, :html=>{:multipart => true } do |f| %>
 		<div class='pool'>
-			<%= render 'nested_pictures', :f => f, :child_index => Time.now.to_i %>
+			<%= f.fields_for :pictures do |builder| %>
+				<%= render 'picture_fields', :f => builder %>
+			<%end%>
+			
 		</div>
-		<%= link_to "Add More", "#", :class => 'add_more_ajax btn btn-default', remote: true %>
+		<%= link_to_add_fields "Add More", f, :pictures %>
 		<%= f.submit 'Save',class: "btn btn-primary", data: { disable_with: 'Saving...' }  %>
 	<%end%>
 </div>

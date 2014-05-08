@@ -9,16 +9,20 @@ class ProductsController < ApplicationController
 	end
 
   def new
+    session[:products_params] ||= {} 
   	@product = Product.new
-  	3.times {@product.pictures.build}
+  	@product.pictures.build
   end
 
   def create
-  	@product = Product.new(product_params)
-  	puts product_params
-  	@product.save!
-
-  	redirect_to products_path
+    puts product_params
+    #session[:products_params].deep_merge!(product_params)
+    puts session[:products_session]
+  	
+    #@product = Product.new(product_params)
+  	#puts product_params
+  	#@product.save!
+  	#redirect_to products_path
 
   end
 
