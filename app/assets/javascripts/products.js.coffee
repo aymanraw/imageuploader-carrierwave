@@ -9,7 +9,8 @@ cloudinary_upload = (obj)->
 		  dropZone: obj,
 		  start: (e) ->
 		        console.log "in progress"
-		        $("#loader").css("display", "normal")
+		        $("#loader").show()
+		        $(this).attr("disabled", "disabled")
 		        $("#imageStatus").text "Starting upload..."
 		  ,progress: (e, data) ->
 		          $("#imageStatus").text("Uploading... " + Math.round((data.loaded * 100.0) / data.total) + "%")
@@ -19,6 +20,7 @@ cloudinary_upload = (obj)->
 		         $("#photo_bytes").val(data.result.bytes)
 		         $("#imageStatus").text("")
 		         input_name = $(this).data("cloudinary-field")
+		         input_f = $(this)
 		         input_field = $(this).parent().parent()
 		         $.ajax 
 		            url: "/products/save_temp_pic",
@@ -30,15 +32,11 @@ cloudinary_upload = (obj)->
 		            ,success: (data, textStatus, jqXHR) -> 
 		            	console.log "Successed"
 		            	input_field.remove()
-		            	console.log "text status is: #{textStatus}"
-		            	console.log "Data is: #{data}"
 		            ,error: (data, textStatus, jqXHR) ->
 		            	console.log "error"
-		            	console.log data
+		            	input_f.removeAttr("disabled")
 		            ,complete: ->
 		            	$("#loader").css("display", "none")
-		            	console.log "Completed"
-		            	$("#loader").css("display", "none") 
 			)
 
 $(document).on 'ready page:load', ->
@@ -52,6 +50,7 @@ $(document).on 'ready page:load', ->
 	    time = new Date().getTime()
 	    regexp = RegExp($(this).data('id'), 'g')
 	    $(this).before($(this).data('fields').replace(regexp, time))
+	    cloudinary_upload $(this).prev().find("input")
 	    event.preventDefault()
 	
    
