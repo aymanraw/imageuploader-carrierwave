@@ -1,0 +1,4 @@
+$(".pool").prepend(
+	"<%= escape_javascript render 'shared/picture_thumb', public_id: @temp_pic.public_id, id:@temp_pic.id, name: params[:name] %>"
+);
+

@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+
+  include ProductsPicture
+
 	def index
 		@products = Product.all
 		render 'show'
@@ -16,7 +19,7 @@ class ProductsController < ApplicationController
 
   def create
     puts product_params
-    #session[:products_params].deep_merge!(product_params)
+    session[:products_params].deep_merge!(without_images) if params[:product]
     puts session[:products_session]
   	
     #@product = Product.new(product_params)
@@ -26,31 +29,10 @@ class ProductsController < ApplicationController
 
   end
 
-  def picture_in
-    render :picture_in, layout: false
-  end
-
-  def save_temp_pic
-    @temp_pic = PictureTemp.new()
-    @temp_pic.public_id = params[:pic]
-  	respond_to do |format|
-      if @temp_pic.save!
-        format.js
-      end
-    end
-  end
-
-  def destroy_pic
-    @temp_pic = PictureTemp.find(params[:id])
-    puts params
-    Cloudinary::Uploader.destroy(@temp_pic.public_id)
-    respond_to do |format|
-      if @temp_pic.destroy
-        format.js {  }
-      else
-        format.js { }
-      end
-    end
+  def without_images
+    car_params_without_pictures = product_params
+    car_params_without_pictures.delete(:pictures_attributes) if params[:car][:pictures_attributes]
+    car_params_without_pictures
   end
 
   def product_params

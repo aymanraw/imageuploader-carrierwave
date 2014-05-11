@@ -1,0 +1,4 @@
+<%= content_tag :div, class: "image-preview", data: {public: public_id, id: id, name: name} do %>
+	<%= cl_image_tag public_id, width: "50", height: "50", crop: "fit" %>
+	<%= link_to('delete', destroy_pic_products_path(id),method: :delete,class: 'btn btn-danger', :remote => true, data: {confirm: 'are you sure?'}) %>
+<%end%>
